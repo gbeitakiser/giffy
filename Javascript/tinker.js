@@ -1,15 +1,14 @@
-$(document).ready(function(){
-
-
-
-
-// Vars
-
-var topics = ["Pulp Fiction", "Kill Bill", "Reservoir Dogs", "Jackie Brown", "Natural Born Killers", "Desperado", "Sin City", "Inglorious Bastards"]
-
 
 
 // Document Ready
+$(document).ready(function(){
+
+
+// Vars
+var topics = ["Pulp Fiction", "Kill Bill", "Reservoir Dogs", "Jackie Brown", "Natural Born Killers", "Desperado", "Sin City", "Inglorious Bastards"]
+
+
+// Displays data to HTML when called
 function displayData() {
     var subject = $(this).attr("data-name");
     var giphyURL = "https://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -19,10 +18,14 @@ function displayData() {
         url: giphyURL,
         method: "GET"
     }).then(function(response) {
-        var results = response.data;
         console.log(response);
-        console.log(results);
-        $("#display").append('<img src=' + results[0].images.fixed_height.url + "'><br><br>");
+        var results = response.data;
+        for (i = 0; i < results.length; i++) {
+            console.log(results[i].images.fixed_height.url);
+            $("#display").append('<img src=' + results[i].images.fixed_height.url + "'><br><br>");
+
+        }
+        // console.log(results[i]);
     })
 };
 
