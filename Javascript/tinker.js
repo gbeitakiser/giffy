@@ -18,14 +18,14 @@ function displayData() {
         url: giphyURL,
         method: "GET"
     }).then(function(response) {
-        console.log(response);
         var results = response.data;
         for (i = 0; i < results.length; i++) {
-            console.log(results[i].images.fixed_height.url);
-            $("#display").append('<img src=' + results[i].images.fixed_height.url + "'><br><br>");
+            var shorten = results[i].images
+            // Can add to shorten and reduce code needed in display call
+            console.log(shorten);
 
+            $("#display").append('<img src=' + shorten.fixed_height.url + "'><br><br>");
         }
-        // console.log(results[i]);
     })
 };
 
