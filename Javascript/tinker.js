@@ -19,7 +19,7 @@ function displayData() {
         method: "GET"
     }).then(function(response) {
         var results = response.data;
-        console.log(results);
+        // console.log(results);
         for (i = 0; i < results.length; i++) {
             var shorten = results[i].images
             // Can add to shorten and reduce code needed in display call
@@ -42,30 +42,46 @@ function displayData() {
             buttonOrig.text(topics[i]);
             buttonValue = buttonOrig[0].value;
             $("#buttons").append(buttonOrig);
-            console.log(buttonValue);
     }
     }
 
     // Adds an inputted search to the array and calls renderButtons function to render it on scren
     $("#submit-search").on("click", function(event) {
-        event.preventDefault();
-        var newTopic = $("#search-input").val().trim();
-        for (i = 0; i < topics.length; i++) {
-            if (newTopic === topics[i]) {
-                alert("A button for " + newTopic + " already exists")
-                console.log("newTopic === topics[i]")
-                return;
-            }
-            else {
-                topics.push(newTopic);
-                renderButtons();
-                $("#search-input").val("");
-                console.log(topics);
-                return;
-                // console.log("newTopic != topics[i]")
+
+        function checkButton() {
+
+            var newTopic = $("#search-input").val();
+
+            for (i = 0; i < topics.length; i++) {
+                if (newTopic.length === 0) {
+                    alert("Don't be lazy, type something!")
+                    return;
+                }
+                //
+                ////
+                //////
+                // Section Below Needs Work
+                else if (newTopic === topics[i]) {
+                    alert("A button for " + newTopic + " already exists")
+                    console.log("newTopic === topics[i]")
+                    $("#search-input").val("");
+                }
+                else {
+                    topics.push(newTopic);
+                    renderButtons();
+                    $("#search-input").val("");
+                    // console.log(topics);
+                    return;
+                    // console.log("newTopic != topics[i]")
+                }
+                // Section Above Needs Work
+                //////
+                ////
+                //
             }
 
         }
+        checkButton();
     })
 
     $("#clear").click(function() {
