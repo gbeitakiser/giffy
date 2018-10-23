@@ -4,7 +4,7 @@ var topics = ["Pulp Fiction", "Kill Bill", "Reservoir Dogs", "Jackie Brown", "Na
 
 // Make "Subject" an empty field that you can append to once I get buttons looped
 var subject = "";
-var btnValue = "";
+// var btnValue = "";
 
 var giphyURL = "https://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=dc6zaTOxFJmzC&limit=10";
 
@@ -22,30 +22,27 @@ $(document).ready(function() {
 
         // var pic1 = $("#display").append('<img src="' + results[0].images.downsized_large.url + '">')
         
-    })
+    })  
 
     // $("#buttons").empty();
     for (var i = 0; i < topics.length; i++) {
-        var buttonUp = $("#buttons").append("<button>" + topics[i] + "</button>");
-        $(buttonUp).val(topics[i]);
-        btnValue = buttonUp[0].value;
-        console.log(btnValue);
-        console.log("-------------")
+        var buttonOrig = $("<button>");
+        buttonOrig.addClass("button");
+        buttonOrig.val(topics[i]);
+        buttonOrig.attr("data-name", topics[i]);
+        buttonOrig.text(topics[i]);
+        buttonValue = buttonOrig[0].value;
+        subject = buttonValue;
 
-
-        $(this).click(function() {
-            console.log(btnValue);
-            subject = btnValue;
-            console.log("-------------")
-
-            console.log(subject);
-        })
-
+        $("#buttons").append(buttonOrig);
+        // console.log(buttonValue);
+        console.log(subject);
+        
+       
     }
-    console.log("-------------")
-    console.log(btnValue);
-    console.log("-------------")
-
+    console.log("-")
+    console.log(subject);
+  
     
 
 });
