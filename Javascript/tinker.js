@@ -1,10 +1,8 @@
-
-
 // Document Ready
 $(document).ready(function(){
 
 
-// Vars
+// Quentin Tarantino's favorite Array
 var topics = ["Pulp Fiction", "Kill Bill", "Reservoir Dogs", "Jackie Brown", "Natural Born Killers", "Desperado", "Sin City", "Inglorious Bastards"]
 
 
@@ -21,17 +19,17 @@ function displayData() {
     }).then(function(response) {
         var results = response.data;
         
+        // Looping through results to find image URLs and display their still versions
         for (i = 0; i < results.length; i++) {
             var shorten = results[i].images
-        console.log(results);
+            console.log(results);
         
-            // Display Initial
+            // Displays stills
             var image = $("<img>");
             image.attr("src", shorten.fixed_height_still.url)
             image.attr("id", i);
             image.attr("display-status", "still")
             var rated = $("<p>")
-            // rated.attr("rating", i)
             rated.text('Rating: ' + results[i].rating.toUpperCase());
             $("#display").append(image);
             $("#display").append(rated);
@@ -40,7 +38,6 @@ function displayData() {
         // Click gif Play/Pause function
         $('img').on("click", function() {
             var id = $(this).attr('id');
-            console.log(id);
             var status = $(this).attr('display-status');
             
             if (status === "still") {
@@ -72,13 +69,13 @@ function displayData() {
     // When submit button is clicked...
     $("#submit-search").on("click", function(event) {
 
-        // Creates a var containing the user input. Will be used to check duplicates and eventually gets pushed to button array if it's not a duplicate
+        // Creates a var containing the user input
         var newTopic = $("#search-input").val();
 
-        // Creates a new array from topics array with lowercased strings. Made so it can compare with lowercased inputs so that users cannot bypass button duplicate checker by altering letter case
+        // Creates a new array from topics array with lowercased strings
         var checkLower = topics.map(function (val) { return val.toLowerCase(); });
 
-        // Checks if the lowercased version of the user input is in the lowercased version of topics array. If it is, it returns the index of it. If not, it returns -1
+        // Checks if the lowercased version of the user input is in the lowercased version of topics array
         var checkTopic = checkLower.indexOf(newTopic.toLowerCase());
 
         // If submit button is clicked with field empty, alerts user to type something
@@ -97,13 +94,6 @@ function displayData() {
             $("#search-input").val("");
         }
     })
-
-
-    
-
-    // Play/Pause Functionality
-
-
 
 
 
