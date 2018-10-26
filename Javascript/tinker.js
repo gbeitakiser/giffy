@@ -23,40 +23,43 @@ function displayData() {
         console.log(results);
         for (i = 0; i < results.length; i++) {
             var shorten = results[i].images
-
+            
             // Function to display still images (called first when button is clicked to ensure stills are loaded first). Asigned number and display status of "still"
             function displayStills() {
                 var image = $("<img>");
                 image.attr("src", shorten.fixed_height_still.url)
-                image.attr("id", i);
+                image.attr("id", "pic" + i);
                 image.attr("display-status", "still")
                 $("#display").append(image);
                 $("#display").append('<p>Rating: ' + results[i].rating.toUpperCase())
             }
 
             function displayMotion() {
-                $('img').attr('id', i);
                 var image = $("<img>");
                 image.attr("src", shorten.fixed_height.url)
+                image.attr("id", "pic" + i);
                 image.attr("display-status", "motion")
-                $("#display").append(this);
+                $("#display").append(image);
                 // $("#display").append('<p>Rating: ' + results[i].rating.toUpperCase())
             }
             
-            $('img').attr("id", i).on("click", function() {
-                console.log("Click Works")
-                if ($("img[data-state = still")) {
+            $('img').on("click", function() {
+                var id = $(this).attr('id');
+                console.log(id);
+                var status = $(this).attr('display-status');
+                console.log(status);
+                
+                if (status === "still") {
+                    $("#display").html("");
                     displayMotion();
-                    // console.log("Stills works")
                 }
-                else if ($("img[data-state = motion")) {
+                else if (status === "motion") {
+                    $("#display").html("");
                     displayStills();
                 }
             })
-            
-
-
             displayStills();
+            // displayMotion();
         }
     })
 };
