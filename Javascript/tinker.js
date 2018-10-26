@@ -20,47 +20,38 @@ function displayData() {
         method: "GET"
     }).then(function(response) {
         var results = response.data;
-        console.log(results);
+        
         for (i = 0; i < results.length; i++) {
             var shorten = results[i].images
-            
-            // Function to display still images (called first when button is clicked to ensure stills are loaded first). Asigned number and display status of "still"
-            function displayStills() {
-                var image = $("<img>");
-                image.attr("src", shorten.fixed_height_still.url)
-                image.attr("id", "pic" + i);
-                image.attr("display-status", "still")
-                $("#display").append(image);
-                $("#display").append('<p>Rating: ' + results[i].rating.toUpperCase())
-            }
-
-            function displayMotion() {
-                var image = $("<img>");
-                image.attr("src", shorten.fixed_height.url)
-                image.attr("id", "pic" + i);
-                image.attr("display-status", "motion")
-                $("#display").append(image);
-                // $("#display").append('<p>Rating: ' + results[i].rating.toUpperCase())
-            }
-            
-            $('img').on("click", function() {
-                var id = $(this).attr('id');
-                console.log(id);
-                var status = $(this).attr('display-status');
-                console.log(status);
-                
-                if (status === "still") {
-                    $("#display").html("");
-                    displayMotion();
-                }
-                else if (status === "motion") {
-                    $("#display").html("");
-                    displayStills();
-                }
-            })
-            displayStills();
-            // displayMotion();
+        console.log(results);
+        
+            // Display Initial
+            var image = $("<img>");
+            image.attr("src", shorten.fixed_height_still.url)
+            image.attr("id", i);
+            image.attr("display-status", "still")
+            var rated = $("<p>")
+            // rated.attr("rating", i)
+            rated.text('Rating: ' + results[i].rating.toUpperCase());
+            $("#display").append(image);
+            $("#display").append(rated);
         }
+
+        // Click gif Play/Pause function
+        $('img').on("click", function() {
+            var id = $(this).attr('id');
+            console.log(id);
+            var status = $(this).attr('display-status');
+            
+            if (status === "still") {
+                $(this).replaceWith($(this).attr("src", results[id].images.fixed_height.url));
+                $(this).attr("display-status", "motion")
+            }
+            else if (status === "motion") {
+                $(this).replaceWith($(this).attr("src", results[id].images.fixed_height_still.url));
+                $(this).attr("display-status", "still")
+            }
+        })
     })
 };
 
