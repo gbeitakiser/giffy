@@ -10,6 +10,7 @@ var topics = ["Pulp Fiction", "Kill Bill", "Reservoir Dogs", "Jackie Brown", "Na
 
 // Runs button that was clicked through Giphy API and returns 10 gifs. Then displays those 10 gifs to HTML
 function displayData() {
+    $("#display").html("");
     var subject = $(this).attr("data-name");
     var giphyURL = "https://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=dc6zaTOxFJmzC&limit=10";
 
@@ -24,9 +25,8 @@ function displayData() {
             var shorten = results[i].images
             // Can add to shorten and reduce code needed in display call
             // console.log(shorten);
-
             $("#display").append('<img src=' + shorten.fixed_height.url + "'><br><br>");
-            $("#display").append('<p>Rating: ' + results[i].rating)
+            $("#display").append('<p>Rating: ' + results[i].rating.toUpperCase())
         }
     })
 };
