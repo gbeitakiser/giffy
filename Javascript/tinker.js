@@ -45,49 +45,41 @@ function displayData() {
     }
     }
 
-    // Adds an inputted search to the array and calls renderButtons function to render it on scren
+    // When submit button is clicked...
     $("#submit-search").on("click", function(event) {
 
-        function checkButton() {
+    // Creates a var containing the user input. Will be used to check duplicates and eventually gets pushed to button array if it's not a duplicate
+    var newTopic = $("#search-input").val();
 
-            var newTopic = $("#search-input").val();
+    // Creates a new array from topics array with lowercased strings. Made so it can compare with lowercased inputs so that users cannot bypass button duplicate checker by altering letter case
+    var checkLower = topics.map(function (val) { return val.toLowerCase(); });
 
-            for (i = 0; i < topics.length; i++) {
-                if (newTopic.length === 0) {
-                    alert("Don't be lazy, type something!")
-                    return;
-                }
-                //
-                ////
-                //////
-                // Section Below Needs Work
-                else if (newTopic === topics[i]) {
-                    alert("A button for " + newTopic + " already exists")
-                    console.log("newTopic === topics[i]")
-                    $("#search-input").val("");
-                }
-                else {
-                    topics.push(newTopic);
-                    renderButtons();
-                    $("#search-input").val("");
-                    // console.log(topics);
-                    return;
-                    // console.log("newTopic != topics[i]")
-                }
-                // Section Above Needs Work
-                //////
-                ////
-                //
-            }
+   // Checks if the lowercased version of the user input is in the lowercased version of topics array. If it is, it returns the index of it. If not, it returns -1
+    var checkTopic = checkLower.indexOf(newTopic.toLowerCase());
 
-        }
-        checkButton();
+    // If submit button is clicked with field empty, alerts user to type something
+    if (newTopic.length === 0) {
+        alert("Don't be lazy, type something!");
+    }
+    // If it's not empty and checkLower variable confirms that typed input is not in the array (returns a value of -1), button is pushed to topics array, rendered on screen, and search field is cleared
+    else if (checkTopic === -1) {
+        topics.push(newTopic)
+        renderButtons();
+        $("#search-input").val("");
+    }
+    // If first two conditions aren't met (meaning the button that has been searched already exists in the array), user is alerted that button already exists, then clears search field
+    else {
+        alert("You already have a button for " + newTopic + "!")
+        $("#search-input").val("");
+    }
     })
 
+    // Clears .gifs from display when clicked
     $("#clear").click(function() {
         $("#display").html("");
     })
 
+    // Clears user created buttons from the page when clicked
     $("#clearBtns").click(function() {
         topics = ["Pulp Fiction", "Kill Bill", "Reservoir Dogs", "Jackie Brown", "Natural Born Killers", "Desperado", "Sin City", "Inglorious Bastards"];
         renderButtons();
