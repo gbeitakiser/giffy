@@ -1,5 +1,9 @@
 # giffy
 
+Description...
+
+1) This app is cool if you find gifs as entertaining as I do. And boy is it entertaining. You have a few buttons with Quentin Tarantino movies on them to get you going, but the entire world of gifs is at your finger tips if you use the search bar to add new buttons. Click one of the new or already available buttons and 10 gifs pop up. But wait!!! They're not gifs! No worries young one, just click the image and you'll soon find that the still image turns into a moving gif. All is well with the world. 
+
 Psudeocode
 
 Site needs....
