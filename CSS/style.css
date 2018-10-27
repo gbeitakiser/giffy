@@ -1,0 +1,9 @@
+.container {
+    margin: auto;
+    width: 50%;
+    background-color: lightcoral;
+}
+
+#buttons {
+    margin: 75px 0px 20px 0px;
+}
