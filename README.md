@@ -13,3 +13,7 @@ Site needs....
 -Play/Pause functionality for all .gifs
 -The ability to dynamically add more buttons when a user searches up a new term
 -Code that blocks user from adding buttons that already exist on button row
+
+
+#Project Link
+https://gbeitakiser.github.io/giffy/ 
